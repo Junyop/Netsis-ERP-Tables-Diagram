@@ -1,0 +1,7 @@
+# ERP Portal Ignore List
+_kaynaklar/
+*.pyc
+__pycache__/
+.DS_Store
+*.json.backup
+node_modules/

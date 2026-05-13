@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netsis DB Dictionary | Premium ERP Veritabanı Rehberi</title>
+    <meta name="description" content="Logo Netsis ERP veritabanı tabloları, kolonları ve ilişkileri için kapsamlı interaktif rehber.">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h1><i data-lucide="database"></i> NetsisDB</h1>
+            <p class="sidebar-subtitle">Veritabanı Sözlüğü</p>
+        </div>
+        <nav class="nav-links">
+            <div class="nav-group">
+                <p class="nav-group-title">Genel</p>
+                <div class="nav-item active" data-view="dashboard" onclick="app.showDashboard(this)">
+                    <i data-lucide="layout-dashboard"></i> Dashboard
+                </div>
+                <div class="nav-item" data-view="all" onclick="app.showAllTables(this)">
+                    <i data-lucide="table"></i> Tüm Tablolar
+                </div>
+                <div class="nav-item" data-view="relations" onclick="app.showRelationMap(this)">
+                <i data-lucide="git-branch"></i>
+                <span>İlişki Haritası</span>
+            </div>
+            <div class="nav-item" data-view="queries" onclick="app.showAdvancedQueries(this)">
+                <i data-lucide="terminal"></i>
+                <span>Önemli Sorgular</span>
+            </div>
+            <div class="nav-item" data-view="user-queries" onclick="app.showUserQueries(this)">
+                <i data-lucide="save"></i>
+                <span>Sorgularım</span>
+            </div>
+            <div class="nav-item" data-view="settings" onclick="app.showSettings(this)">
+                <i data-lucide="settings"></i>
+                <span>Sistem Yönetimi</span>
+            </div>
+            
+            <div class="nav-group-title" style="margin-top: 1.5rem;">Modüller</div>
+                <div id="module-list"></div>
+            </div>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="version-badge">v2.2 — Netsis 631 | Tiger 439</div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="top-bar">
+            <div class="search-container">
+                <i data-lucide="search" class="search-icon"></i>
+                <input type="text" id="global-search" class="search-input" placeholder="Tablo, kolon veya açıklama ara..." oninput="app.handleSearch(this.value)">
+                <kbd class="search-kbd">Ctrl+K</kbd>
+            </div>
+            <div class="top-bar-actions">
+                <div class="erp-toggle">
+                    <button class="erp-btn active" id="btn-netsis" onclick="app.setERPMode('netsis')">Netsis</button>
+                    <button class="erp-btn" id="btn-tiger" onclick="app.setERPMode('tiger')">Tiger</button>
+                </div>
+                <button class="icon-btn" onclick="app.exportAllData()" title="Tüm veriyi JSON olarak indir">
+                    <i data-lucide="download"></i>
+                </button>
+            </div>
+        </header>
+
+        <section class="content-area" id="main-view"></section>
+        <section class="content-area detail-view" id="detail-view">
+            <div id="detail-content"></div>
+        </section>
+    </main>
+
+    <!-- Data Files -->
+    <!-- Netsis Data -->
+    <script src="data/netsis/N_mapping.js"></script>
+    
+    <!-- Modal System -->
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Başlık</h3>
+                <button class="close-btn" onclick="app.closeModal()">&times;</button>
+            </div>
+            <div id="modal-body" class="modal-body">
+                <!-- Form içeriği buraya gelecek -->
+            </div>
+        </div>
+    </div>
+
+    <script src="data/netsis/N_stok.js"></script>
+    <script src="data/netsis/N_cari.js"></script>
+    <script src="data/netsis/N_fatura.js"></script>
+    <script src="data/netsis/N_siparis.js"></script>
+    <script src="data/netsis/N_finans.js"></script>
+    <script src="data/netsis/N_muhasebe.js"></script>
+    <script src="data/netsis/N_uretim.js"></script>
+    <script src="data/netsis/N_diger.js"></script>
+    <script src="data/netsis/N_sorgular.js"></script>
+    
+    <!-- Tiger Data -->
+    <script src="data/tiger/T_stok.js"></script>
+    <script src="data/tiger/T_cari.js"></script>
+    <script src="data/tiger/T_fatura.js"></script>
+    <script src="data/tiger/T_siparis.js"></script>
+    <script src="data/tiger/T_finans.js"></script>
+    <script src="data/tiger/T_muhasebe.js"></script>
+    <script src="data/tiger/T_uretim.js"></script>
+    <script src="data/tiger/T_diger.js"></script>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
